@@ -8,6 +8,7 @@ import services.Counter
 /**
  * Unit tests can run without a full Play application.
  */
+
 class UnitSpec extends PlaySpec {
 
   "CountController" should {
