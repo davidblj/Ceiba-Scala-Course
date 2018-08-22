@@ -15,8 +15,11 @@ GET     /assets/*file               controllers.Assets.versioned(file)
 # Ceiba, scala exercises
 
 # Actions, controllers and results
-# 2.
+    # 2.
 
 GET /testing/ok  controllers.TestingController.found
 GET /testing/bad-request  controllers.TestingController.badRequest
 GET /testing/internal-server-error  controllers.TestingController.internalServerError
+
+    # 3
+GET /testing/learn-scala  controllers.TestingController.learnSomeScala
