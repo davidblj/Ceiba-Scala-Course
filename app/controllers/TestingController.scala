@@ -8,6 +8,7 @@ import scala.concurrent.ExecutionContext
 class TestingController @Inject() (cc: ControllerComponents) (implicit exec: ExecutionContext)
   extends AbstractController(cc) {
 
+  // actions
   def found = Action { request => Ok("look at this nice and minimalistic controller definition") }
   def badRequest = Action { request => BadRequest("Oops, page not found")}
   def internalServerError = Action { request => InternalServerError("Omg, you just broke this !")}
@@ -16,9 +17,14 @@ class TestingController @Inject() (cc: ControllerComponents) (implicit exec: Exe
       "C:\\Users\\david.jaramillo\\Desktop\\repos\\Idea workspace\\Starter\\public\\pdf\\essential-scala.pdf"),
       false)}
 
+  // routes
   def getRequest = Action { request => Ok("a get request !")}
   def postRequest = Action { request => Ok("a post request !")}
   def putRequest = Action { request => Ok("a put request !")}
   def deleteRequest = Action { request => Ok("a delete request !")}
   def patchRequest = Action { request => Ok("a patch request !")}
+
+  def queryParameter(parameter: String) = Action { request =>
+    Ok(s"a parameter with a value ${parameter} have been issued")
+  }
 }
