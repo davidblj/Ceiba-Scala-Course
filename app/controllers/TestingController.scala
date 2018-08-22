@@ -1,7 +1,10 @@
 package controllers
 
+import akka.util.ByteString
 import javax.inject.Inject
-import play.api.mvc.{AbstractController, ControllerComponents}
+import play.api.http.HttpEntity
+import play.api.mvc.{AbstractController, ControllerComponents, ResponseHeader, Result}
+import play.api.mvc.Cookie
 
 import scala.concurrent.ExecutionContext
 
@@ -26,5 +29,22 @@ class TestingController @Inject() (cc: ControllerComponents) (implicit exec: Exe
 
   def queryParameter(parameter: String) = Action { request =>
     Ok(s"a parameter with a value ${parameter} have been issued")
+  }
+
+  // response manipulation
+  def customContentType = Action { Ok(<h1>Hello World!</h1>).as(HTML) }
+
+  def customHeader = Action { Ok("a custom header").withHeaders(("CACHE_CONTROL", "max-age=3600"),("ETAG", "xx")) }
+
+  // response configuration with a custom header
+  // and an explicit content type
+  def customHeader_v2 = Action {
+    Result(header =
+      ResponseHeader(401, Map.empty),
+      body = HttpEntity.Strict(ByteString("Hello world!"), Some("text/plain")))
+  }
+
+  def cookieResponse = Action {
+    Ok("Here, take a cookie").withCookies(Cookie("Taste", "Strawberry"))
   }
 }

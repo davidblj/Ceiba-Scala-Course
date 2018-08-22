@@ -29,11 +29,11 @@ GET /testing/learn-scala  controllers.TestingController.learnSomeScala
 # Routing
 
     # 1.
-GET /testing/getRequest  controllers.TestingController.getRequest
-POST /testing/postRequest  controllers.TestingController.postRequest
-PUT /testing/putRequest  controllers.TestingController.putRequest
-DELETE /testing/deleteRequest  controllers.TestingController.deleteRequest
-PATCH /testing/patchRequest  controllers.TestingController.patchRequest
+GET /testing/getRequest             controllers.TestingController.getRequest
+POST /testing/postRequest           controllers.TestingController.postRequest
+PUT /testing/putRequest             controllers.TestingController.putRequest
+DELETE /testing/deleteRequest       controllers.TestingController.deleteRequest
+PATCH /testing/patchRequest         controllers.TestingController.patchRequest
 
     # 2.
 # Path parameter: localhost:9000/testing/parameters/doIt
@@ -42,4 +42,14 @@ GET /testing/parameters/:parameter  controllers.TestingController.queryParameter
 # Query parameter: localhost:9000/testing/parameters?parameter=doIt
 GET /testing/parameters  controllers.TestingController.queryParameter(parameter)
 
+# Manipulating results
 
+    # 1.
+GET /testing/customType         controllers.TestingController.customContentType
+
+    # 2.
+GET /testing/customHeader       controllers.TestingController.customHeader
+GET /testing/customHeader_v2    controllers.TestingController.customHeader_v2
+
+    # 3.
+GET /testing/getCookie          controllers.TestingController.cookieResponse
