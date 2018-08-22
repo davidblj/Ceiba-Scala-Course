@@ -15,4 +15,10 @@ class TestingController @Inject() (cc: ControllerComponents) (implicit exec: Exe
     new java.io.File(
       "C:\\Users\\david.jaramillo\\Desktop\\repos\\Idea workspace\\Starter\\public\\pdf\\essential-scala.pdf"),
       false)}
+
+  def getRequest = Action { request => Ok("a get request !")}
+  def postRequest = Action { request => Ok("a post request !")}
+  def putRequest = Action { request => Ok("a put request !")}
+  def deleteRequest = Action { request => Ok("a delete request !")}
+  def patchRequest = Action { request => Ok("a patch request !")}
 }

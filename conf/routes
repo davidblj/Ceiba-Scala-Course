@@ -12,7 +12,9 @@ GET     /message                    controllers.AsyncController.message
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(file)
 
-# Ceiba, scala exercises
+
+# --------------- Ceiba, scala exercises ------------------
+
 
 # Actions, controllers and results
     # 2.
@@ -21,5 +23,13 @@ GET /testing/ok  controllers.TestingController.found
 GET /testing/bad-request  controllers.TestingController.badRequest
 GET /testing/internal-server-error  controllers.TestingController.internalServerError
 
-    # 3
+    # 3.
 GET /testing/learn-scala  controllers.TestingController.learnSomeScala
+
+# Routing
+    # 1.
+GET /testing/getRequest  controllers.TestingController.getRequest
+POST /testing/postRequest  controllers.TestingController.postRequest
+PUT /testing/putRequest  controllers.TestingController.putRequest
+DELETE /testing/deleteRequest  controllers.TestingController.deleteRequest
+PATCH /testing/patchRequest  controllers.TestingController.patchRequest
