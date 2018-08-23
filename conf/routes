@@ -53,3 +53,8 @@ GET /testing/customHeader_v2    controllers.TestingController.customHeader_v2
 
     # 3.
 GET /testing/getCookie          controllers.TestingController.cookieResponse
+
+# Error handling
+
+    #1
+GET /testing/handle             controllers.TestingController.handle

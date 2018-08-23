@@ -47,4 +47,13 @@ class TestingController @Inject() (cc: ControllerComponents) (implicit exec: Exe
   def cookieResponse = Action {
     Ok("Here, take a cookie").withCookies(Cookie("Taste", "Strawberry"))
   }
+
+  // action composition
+
+
+  // ErrorHandling
+  def handle = Action {
+    throw new IllegalStateException("Exception thrown")
+    Ok("This wont actually execute")
+  }
 }
