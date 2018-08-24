@@ -6,7 +6,7 @@ import play.api.http.HttpEntity
 import play.api.mvc.{AbstractController, ControllerComponents, ResponseHeader, Result}
 import play.api.mvc.Cookie
 
-import scala.concurrent.ExecutionContext
+import scala.concurrent.{ExecutionContext, Future, TimeoutException}
 
 class TestingController @Inject() (cc: ControllerComponents) (implicit exec: ExecutionContext)
   extends AbstractController(cc) {
@@ -55,5 +55,20 @@ class TestingController @Inject() (cc: ControllerComponents) (implicit exec: Exe
   def handle = Action {
     throw new IllegalStateException("Exception thrown")
     Ok("This wont actually execute")
+  }
+
+  // Http Async
+  def asyncRequest = Action.async {
+    someCalculation().map( calculationResult => {
+      Ok(s"The calculation result is ${calculationResult}")
+    }).recover {
+      case e: TimeoutException =>
+        InternalServerError(s"Calculation timed out! exception thrown is: ${e.getMessage}")
+    }
+  }
+
+  // privates
+  private def someCalculation(): Future[Int] = {
+    Future.successful(42)
   }
 }

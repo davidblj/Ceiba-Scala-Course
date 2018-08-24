@@ -16,7 +16,8 @@ GET     /assets/*file               controllers.Assets.versioned(file)
 # --------------- Ceiba, scala exercises ------------------
 
 
-# Actions, controllers and results
+# *** Actions, controllers and results ***
+
 
     # 2.
 GET /testing/ok  controllers.TestingController.found
@@ -26,7 +27,9 @@ GET /testing/internal-server-error  controllers.TestingController.internalServer
     # 3.
 GET /testing/learn-scala  controllers.TestingController.learnSomeScala
 
-# Routing
+
+# *** Routing ***
+
 
     # 1.
 GET /testing/getRequest             controllers.TestingController.getRequest
@@ -42,7 +45,9 @@ GET /testing/parameters/:parameter  controllers.TestingController.queryParameter
 # Query parameter: localhost:9000/testing/parameters?parameter=doIt
 GET /testing/parameters  controllers.TestingController.queryParameter(parameter)
 
-# Manipulating results
+
+# *** Manipulating results ***
+
 
     # 1.
 GET /testing/customType         controllers.TestingController.customContentType
@@ -54,7 +59,14 @@ GET /testing/customHeader_v2    controllers.TestingController.customHeader_v2
     # 3.
 GET /testing/getCookie          controllers.TestingController.cookieResponse
 
-# Error handling
+
+# *** Error handling ***
+
 
     #1
 GET /testing/handle             controllers.TestingController.handle
+
+#Http Async
+
+    #5
+GET /testing/asyncRequest       controllers.TestingController.asyncRequest
