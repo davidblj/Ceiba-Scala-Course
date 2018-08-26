@@ -1,4 +1,4 @@
-name := """play-scala-starter-example"""
+name := """Ceiba Starter Template"""
 
 version := "1.0-SNAPSHOT"
 

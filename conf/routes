@@ -58,3 +58,18 @@ GET /testing/getCookie          controllers.TestingController.cookieResponse
 
     #1
 GET /testing/handle             controllers.TestingController.handle
+
+# PlayJson
+
+    #1
+GET /testing/jsvalue              controllers.TestingController.jsValue
+
+    #2
+GET /testing/jsManualWrite                  controllers.TestingController.jsManualWrite
+GET /testing/jsAutomaticWrite               controllers.TestingController.jsAutomaticWrite
+
+    #3
+GET /testing/jsonSearch                     controllers.TestingController.jsonSearch
+
+    #4
+GET /testing/jsonReadValidation             controllers.TestingController.jsonReadValidation
