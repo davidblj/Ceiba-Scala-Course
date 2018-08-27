@@ -1,5 +1,7 @@
 package controllers
 
+import java.nio.file.Paths
+
 import akka.util.ByteString
 import javax.inject.Inject
 import models.{Owner, Person, PersonList}
@@ -32,13 +34,9 @@ class TestingController @Inject()(cc: ControllerComponents, parser: PlayBodyPars
 
   // routes
   def getRequest = Action { request => Ok("a get request !") }
-
   def postRequest = Action { request => Ok("a post request !") }
-
   def putRequest = Action { request => Ok("a put request !") }
-
   def deleteRequest = Action { request => Ok("a delete request !") }
-
   def patchRequest = Action { request => Ok("a patch request !") }
 
   def queryParameter(parameter: String) = Action { request =>
@@ -179,12 +177,33 @@ class TestingController @Inject()(cc: ControllerComponents, parser: PlayBodyPars
     }
   }
 
+  // validation process
   def addAsync = Action(parserValidation.validateJson[Person]) {
 
     request => {
       val person = request.body
       PersonList.save(person)
       Ok(Json.toJson(PersonList.list))
+    }
+  }
+
+  // Manejo de archivos
+  def fileUpload = Action(parser.multipartFormData) {
+
+    request => {
+
+      request.body.file("file").map { file =>
+
+        val filename = Paths.get(file.filename).getFileName
+        file.ref.moveTo(Paths.get(
+          s"C:\\Users\\david.jaramillo\\Downloads\\Scala\\media\\${filename}"),
+          replace = true)
+
+        Ok("File uploaded")
+
+      }.getOrElse {
+        BadRequest("Oops, page not found")
+      }
     }
   }
 }

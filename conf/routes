@@ -96,11 +96,19 @@ GET /testing/jsonReadValidation             controllers.TestingController.jsonRe
 
     #2
 GET /testing/listSync                       controllers.TestingController.listSync
-GET /testing/listAsync                       controllers.TestingController.listAsync
+GET /testing/listAsync                      controllers.TestingController.listAsync
 
     #3
 +nocsrf
 POST /testing/addSync                       controllers.TestingController.addSync
 
 +nocsrf
-POST /testing/addAsync                       controllers.TestingController.addAsync
+POST /testing/addAsync                      controllers.TestingController.addAsync
+
+
+# *** Manejo de archivos ***
+
+
+    #1
++nocsrf
+POST /testing/fileUpload                     controllers.TestingController.fileUpload
