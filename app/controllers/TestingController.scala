@@ -2,19 +2,19 @@ package controllers
 
 import akka.util.ByteString
 import javax.inject.Inject
+import models.{Owner, Person, PersonList}
+import models.PersonList._
 import play.api.http.HttpEntity
-import models.Owner
 import play.api.libs.json._
 import play.api.libs.json.Reads._
 import play.api.libs.functional.syntax._
-import play.api.mvc.{AbstractController, ControllerComponents, ResponseHeader, Result}
-import play.api.mvc.Cookie
-import play.api.mvc.Results.InternalServerError
+import play.api.mvc._
+import utils.Validate
 
 import scala.concurrent.{ExecutionContext, Future, TimeoutException}
 
-class TestingController @Inject() (cc: ControllerComponents) (implicit exec: ExecutionContext)
-  extends AbstractController(cc) {
+class TestingController @Inject()(cc: ControllerComponents, parser: PlayBodyParsers, parserValidation: Validate)
+                                 (implicit exec: ExecutionContext) extends AbstractController(cc) {
 
   // actions
   def found = Action { request => Ok("look at this nice and minimalistic controller definition") }
@@ -77,6 +77,7 @@ class TestingController @Inject() (cc: ControllerComponents) (implicit exec: Exe
 
   // Http Async
   def asyncRequest = Action.async {
+
     someCalculation().map(calculationResult => {
       Ok(s"The calculation result is ${calculationResult}")
     }).recover {
@@ -138,8 +139,8 @@ class TestingController @Inject() (cc: ControllerComponents) (implicit exec: Exe
 
     implicit val ownerReads: Reads[Owner] = (
       (JsPath \ "name").read[String](minLength[String](2)) and
-      (JsPath \ "surname").read[String](minLength[String](2))
-    )(Owner.apply _)
+        (JsPath \ "surname").read[String](minLength[String](2))
+      ) (Owner.apply _)
 
     val json: JsValue = Json.obj(
       "name" -> "david",
@@ -148,9 +149,42 @@ class TestingController @Inject() (cc: ControllerComponents) (implicit exec: Exe
     val jsonResult = json.validate[Owner]
 
     jsonResult match {
-        case JsSuccess(owner: Owner, path: JsPath) => Ok(s"The owner of this app is named: ${owner.name}")
-        case e: JsError => InternalServerError("Errors: " + JsError.toJson(e).toString())
+      case JsSuccess(owner: Owner, path: JsPath) => Ok(s"The owner of this app is named: ${owner.name}")
+      case e: JsError => InternalServerError("Errors: " + JsError.toJson(e).toString())
     }
   }
 
+  // Scala Json HTTP
+  def listSync = Action {
+    Ok(Json.toJson(PersonList.list))
+  }
+
+  def listAsync = Action.async {
+    Future.successful(
+      Ok(Json.toJson(PersonList.list))
+    )
+  }
+
+  def addSync = Action(parser.json) {
+
+    request => {
+      val person: JsResult[Person] = request.body.validate[Person]
+      person match {
+        case JsSuccess(person: Person, path: JsPath) => {
+          PersonList.save(person)
+          Ok(Json.toJson(PersonList.list))
+        }
+        case e: JsError => BadRequest(JsError.toJson(e).toString())
+      }
+    }
+  }
+
+  def addAsync = Action(parserValidation.validateJson[Person]) {
+
+    request => {
+      val person = request.body
+      PersonList.save(person)
+      Ok(Json.toJson(PersonList.list))
+    }
+  }
 }

@@ -66,15 +66,19 @@ GET /testing/getCookie          controllers.TestingController.cookieResponse
     #1
 GET /testing/handle             controllers.TestingController.handle
 
-#Http Async
+
+# *** Http Async ***
+
 
     #5
 GET /testing/asyncRequest       controllers.TestingController.asyncRequest
 
-# PlayJson
+
+# *** PlayJson ***
+
 
     #1
-GET /testing/jsvalue              controllers.TestingController.jsValue
+GET /testing/jsvalue                        controllers.TestingController.jsValue
 
     #2
 GET /testing/jsManualWrite                  controllers.TestingController.jsManualWrite
@@ -85,3 +89,18 @@ GET /testing/jsonSearch                     controllers.TestingController.jsonSe
 
     #4
 GET /testing/jsonReadValidation             controllers.TestingController.jsonReadValidation
+
+
+# *** Json Http ***
+
+
+    #2
+GET /testing/listSync                       controllers.TestingController.listSync
+GET /testing/listAsync                       controllers.TestingController.listAsync
+
+    #3
++nocsrf
+POST /testing/addSync                       controllers.TestingController.addSync
+
++nocsrf
+POST /testing/addAsync                       controllers.TestingController.addAsync
