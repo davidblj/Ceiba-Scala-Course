@@ -45,6 +45,9 @@ GET /testing/parameters/:parameter  controllers.TestingController.queryParameter
 # Query parameter: localhost:9000/testing/parameters?parameter=doIt
 GET /testing/parameters  controllers.TestingController.queryParameter(parameter)
 
+    # 3
+# requestWithHeader
+GET /testing/requestWithHeader  controllers.TestingController.requestWithHeader
 
 # *** Manipulating results ***
 

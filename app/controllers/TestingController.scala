@@ -43,6 +43,14 @@ class TestingController @Inject()(cc: ControllerComponents, parser: PlayBodyPars
     Ok(s"a parameter with a value ${parameter} have been issued")
   }
 
+  def requestWithHeader() = Action {
+    request => {
+      val headers = request.headers;
+      val authentication = headers.get("Authentication").get;
+      Ok(s"request received with an auth token of: ${authentication}")
+    }
+  }
+
   // response manipulation
   def customContentType = Action {
     Ok(<h1>Hello World!</h1>).as(HTML)
