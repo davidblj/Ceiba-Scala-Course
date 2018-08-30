@@ -45,8 +45,8 @@ class TestingController @Inject()(cc: ControllerComponents, parser: PlayBodyPars
 
   def requestWithHeader() = Action {
     request => {
-      val headers = request.headers;
-      val authentication = headers.get("Authentication").get;
+      val headers = request.headers
+      val authentication = headers.get("Authentication").get
       Ok(s"request received with an auth token of: ${authentication}")
     }
   }
