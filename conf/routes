@@ -115,3 +115,10 @@ POST /testing/addAsync                      controllers.TestingController.addAsy
     #1
 +nocsrf
 POST /testing/fileUpload                     controllers.TestingController.fileUpload
+
+
+# *** Play Slick ***
+
+
+GET /humans                                 controllers.HumanController.list
+

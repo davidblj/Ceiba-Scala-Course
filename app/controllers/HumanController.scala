@@ -1,6 +1,8 @@
 package controllers
 
 import dao.HumanDAO
+import models.Human.humanFormat
+
 import javax.inject.Inject
 import play.api.libs.json.Json
 import play.api.mvc.{AbstractController, MessagesControllerComponents}
