@@ -120,5 +120,7 @@ POST /testing/fileUpload                     controllers.TestingController.fileU
 # *** Play Slick ***
 
 
-GET /humans                                 controllers.HumanController.list
-
+GET /humans                                     controllers.HumanController.list
+POST /humans                                    controllers.HumanController.create
+PUT /humans                                    controllers.HumanController.update
+DELETE /humans/:id                              controllers.HumanController.delete(id: Long)

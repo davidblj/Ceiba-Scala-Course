@@ -6,7 +6,7 @@ import slick.lifted.ProvenShape
 
 class Humans(tag: Tag) extends Table[Human](tag, "humans") {
 
-  def id: Rep[Long] = column[Long]("id", O.PrimaryKey, O.AutoInc)
+  def id: Rep[Option[Long]] = column[Option[Long]]("id", O.PrimaryKey, O.AutoInc)
   def name: Rep[String] = column[String]("name")
   def age: Rep[Int] = column[Int]("age")
   def ethnicity: Rep[String] = column[String]("ethnicity")
