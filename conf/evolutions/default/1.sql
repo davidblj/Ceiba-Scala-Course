@@ -10,4 +10,4 @@ CREATE TABLE humans (
 
 # --- !Downs
 
-DROP TABLE "humans" IF EXISTS;
+DROP TABLE IF EXISTS humans;
