@@ -16,4 +16,5 @@ libraryDependencies += "com.h2database" % "h2" % "1.4.197"
 
 libraryDependencies += "com.typesafe.play" %% "play-slick" % "3.0.3"
 libraryDependencies += "com.typesafe.play" %% "play-slick-evolutions" % "3.0.3"
-libraryDependencies += "mysql" % "mysql-connector-java" % "8.0.12"
+libraryDependencies += "mysql" % "mysql-connector-java" % "5.1.47"
+// libraryDependencies += "mysql" % "mysql-connector-java" % "8.0.12"
