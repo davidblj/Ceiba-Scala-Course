@@ -114,7 +114,7 @@ POST /testing/addAsync                      controllers.TestingController.addAsy
 
     #1
 +nocsrf
-POST /testing/fileUpload                     controllers.TestingController.fileUpload
+POST /testing/fileUpload                    controllers.TestingController.fileUpload
 
 
 # *** Play Slick ***
@@ -122,5 +122,16 @@ POST /testing/fileUpload                     controllers.TestingController.fileU
 
 GET /humans                                     controllers.HumanController.list
 POST /humans                                    controllers.HumanController.create
-PUT /humans                                    controllers.HumanController.update
+PUT /humans                                     controllers.HumanController.update
 DELETE /humans/:id                              controllers.HumanController.delete(id: Long)
+
+
+# *** Play Slick ***
+
+
+    #2
+GET /testing/simpleCache                    controllers.TestingController.simpleCache
+
+    #3
+GET /testing/listCached                     controllers.HumanController.listCached
+GET /testing/listHttpCached                 controllers.HumanController.listHttpCached

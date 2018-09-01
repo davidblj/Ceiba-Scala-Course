@@ -7,6 +7,7 @@ import javax.inject.Inject
 import models.{Owner, Person, PersonList}
 import models.PersonList._
 import play.api.http.HttpEntity
+import play.api.cache._
 import play.api.libs.json._
 import play.api.libs.json.Reads._
 import play.api.libs.functional.syntax._
@@ -15,7 +16,7 @@ import utils.Validate
 
 import scala.concurrent.{ExecutionContext, Future, TimeoutException}
 
-class TestingController @Inject()(cc: ControllerComponents, parser: PlayBodyParsers, parserValidation: Validate)
+class TestingController @Inject()(cc: ControllerComponents, parser: PlayBodyParsers, cache: AsyncCacheApi, parserValidation: Validate)
                                  (implicit exec: ExecutionContext) extends AbstractController(cc) {
 
   // actions
@@ -214,4 +215,23 @@ class TestingController @Inject()(cc: ControllerComponents, parser: PlayBodyPars
       }
     }
   }
+
+  // play cache
+  def simpleCache = Action.async {
+
+    val complexResult: Future[Int] = cache.getOrElseUpdate[Int]("complex-calc") {
+      println("take notes, this wont print a second time !")
+      Future.successful(complexCalculation())
+    }
+
+    complexResult
+      .map(value => {
+        Ok(s"the complex calculation result is $value")
+      }).recover {
+        case _ => InternalServerError("this wont execute")
+      }
+  }
+
+  private def complexCalculation() = 1 + 1
+
 }
