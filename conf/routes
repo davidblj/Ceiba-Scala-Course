@@ -135,3 +135,9 @@ GET /testing/simpleCache                    controllers.TestingController.simple
     #3
 GET /testing/listCached                     controllers.HumanController.listCached
 GET /testing/listHttpCached                 controllers.HumanController.listHttpCached
+
+
+# *** Play Ws ***
+
+
+GET /testing/wsAction                 controllers.TestingController.wsAction

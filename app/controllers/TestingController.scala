@@ -11,12 +11,14 @@ import play.api.cache._
 import play.api.libs.json._
 import play.api.libs.json.Reads._
 import play.api.libs.functional.syntax._
+import play.api.libs.ws.WSClient
 import play.api.mvc._
 import utils.Validate
 
 import scala.concurrent.{ExecutionContext, Future, TimeoutException}
 
-class TestingController @Inject()(cc: ControllerComponents, parser: PlayBodyParsers, cache: AsyncCacheApi, parserValidation: Validate)
+class TestingController @Inject()(cc: ControllerComponents, parser: PlayBodyParsers, cache: AsyncCacheApi,
+                                  parserValidation: Validate, ws: WSClient)
                                  (implicit exec: ExecutionContext) extends AbstractController(cc) {
 
   // actions
@@ -234,4 +236,14 @@ class TestingController @Inject()(cc: ControllerComponents, parser: PlayBodyPars
 
   private def complexCalculation() = 1 + 1
 
+  // play ws
+  def wsAction = Action.async {
+
+    val steinsGateUrl = "https://api.jikan.moe/v3/anime/9253/episodes"
+    ws.url(steinsGateUrl).get().map {
+      response => {
+        Ok(response.json)
+      }
+    }
+  }
 }
