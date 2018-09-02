@@ -140,4 +140,12 @@ GET /testing/listHttpCached                 controllers.HumanController.listHttp
 # *** Play Ws ***
 
 
-GET /testing/wsAction                 controllers.TestingController.wsAction
+GET /testing/wsAction                   controllers.TestingController.wsAction
+
+
+# *** Dependency injection ***
+
+
+GET /testing/greet                      controllers.TestingController.greet
+
+

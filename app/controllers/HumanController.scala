@@ -13,7 +13,7 @@ import scala.concurrent.duration._
 import scala.concurrent.{ExecutionContext, Future}
 
 class HumanController @Inject() (humanRepo: HumanRepository, parser: PlayBodyParsers, cc: MessagesControllerComponents,
-                                 cache: AsyncCacheApi, cached: Cached, parserValidation: Validate )
+                                 cache: AsyncCacheApi, cached: Cached, parserValidation: Validate)
                                 (implicit  ec: ExecutionContext) extends AbstractController(cc) {
 
   def list = Action.async {

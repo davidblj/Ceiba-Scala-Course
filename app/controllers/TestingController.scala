@@ -3,6 +3,7 @@ package controllers
 import java.nio.file.Paths
 
 import akka.util.ByteString
+import com.google.inject.name.Named
 import javax.inject.Inject
 import models.{Owner, Person, PersonList}
 import models.PersonList._
@@ -13,12 +14,13 @@ import play.api.libs.json.Reads._
 import play.api.libs.functional.syntax._
 import play.api.libs.ws.WSClient
 import play.api.mvc._
+import services.Greeter
 import utils.Validate
 
 import scala.concurrent.{ExecutionContext, Future, TimeoutException}
 
 class TestingController @Inject()(cc: ControllerComponents, parser: PlayBodyParsers, cache: AsyncCacheApi,
-                                  parserValidation: Validate, ws: WSClient)
+                                  parserValidation: Validate, ws: WSClient, @Named("es") greeter: Greeter )
                                  (implicit exec: ExecutionContext) extends AbstractController(cc) {
 
   // actions
@@ -246,4 +248,12 @@ class TestingController @Inject()(cc: ControllerComponents, parser: PlayBodyPars
       }
     }
   }
+
+  // play di
+  def greet = Action {
+    Ok(greeter.sayHello())
+  }
+
+  // use guice app loader
+
 }
