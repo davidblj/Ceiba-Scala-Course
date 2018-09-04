@@ -7,6 +7,8 @@ import services.{EnglishGreeter, Greeter, SpanishGreeter}
 class LanguageModule extends AbstractModule{
 
   override def configure(): Unit = {
+    // Ask Guice to create an instance of ApplicationTimer when the
+    // application starts.
 
     bind(classOf[Greeter])
       .annotatedWith(Names.named("es"))
