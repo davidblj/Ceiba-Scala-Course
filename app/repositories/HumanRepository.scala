@@ -6,11 +6,18 @@ import play.api.db.slick.DatabaseConfigProvider
 import slick.jdbc.JdbcProfile
 import slick.lifted.TableQuery
 import tables.Humans
-
 import scala.concurrent.{ExecutionContext, Future}
 
+trait HumanRepository {
+  def create(human: Human): Future[Int]
+  def list(): Future[Seq[Human]]
+  def del(id: Long): Future[Int]
+  def update(human: Human): Future[Int]
+}
+
 @Singleton
-class HumanRepository @Inject()(dbConfigProvider: DatabaseConfigProvider)(implicit ec: ExecutionContext) {
+class HumanRepositoryImp @Inject()(dbConfigProvider: DatabaseConfigProvider)
+                                  (implicit ec: ExecutionContext) extends HumanRepository {
 
   private val dbConfig = dbConfigProvider.get[JdbcProfile]
   private val humans = TableQuery[Humans]

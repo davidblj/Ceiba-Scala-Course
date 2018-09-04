@@ -119,7 +119,6 @@ POST /testing/fileUpload                    controllers.TestingController.fileUp
 
 # *** Play Slick ***
 
-
 GET /humans                                     controllers.HumanController.list
 POST /humans                                    controllers.HumanController.create
 PUT /humans                                     controllers.HumanController.update

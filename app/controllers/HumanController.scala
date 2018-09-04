@@ -1,6 +1,6 @@
 package controllers
 
-import repositories.HumanRepository
+import repositories.HumanRepositoryImp
 import models.Human.humanFormat
 import javax.inject.Inject
 import models.Human
@@ -12,7 +12,7 @@ import utils.Validate
 import scala.concurrent.duration._
 import scala.concurrent.{ExecutionContext, Future}
 
-class HumanController @Inject() (humanRepo: HumanRepository, parser: PlayBodyParsers, cc: MessagesControllerComponents,
+class HumanController @Inject() (humanRepo: HumanRepositoryImp, parser: PlayBodyParsers, cc: MessagesControllerComponents,
                                  cache: AsyncCacheApi, cached: Cached, parserValidation: Validate)
                                 (implicit  ec: ExecutionContext) extends AbstractController(cc) {
 

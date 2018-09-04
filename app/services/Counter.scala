@@ -12,7 +12,7 @@ trait Counter {
   def nextCount(): Int
 }
 
-/**
+/**◘
  * This class is a concrete implementation of the [[Counter]] trait.
  * It is configured for Guice dependency injection in the [[Module]]
  * class.

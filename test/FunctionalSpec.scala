@@ -34,7 +34,7 @@ class FunctionalSpec extends PlaySpec with GuiceOneAppPerSuite {
 
   }
 
-  "CountController" should {
+  /* "CountController" should {
 
     "return an increasing count" in {
       contentAsString(route(app, FakeRequest(GET, "/count")).get) mustBe "0"
@@ -42,5 +42,5 @@ class FunctionalSpec extends PlaySpec with GuiceOneAppPerSuite {
       contentAsString(route(app, FakeRequest(GET, "/count")).get) mustBe "2"
     }
 
-  }
+  }*/
 }
