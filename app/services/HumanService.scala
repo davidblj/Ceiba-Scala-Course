@@ -2,11 +2,11 @@ package services
 
 import javax.inject.Inject
 import models.Human
-import repositories.HumanRepositoryImp
+import repositories.{HumanRepository}
 
 import scala.concurrent.Future
 
-class HumanService @Inject() (humanRepo: HumanRepositoryImp) {
+class HumanService @Inject() (humanRepo: HumanRepository) {
 
     def listHumans(): Future[Seq[Human]] = {
 

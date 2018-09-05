@@ -7,18 +7,19 @@ import models.Human
 import play.api.cache._
 import play.api.libs.json.Json
 import play.api.mvc._
+import services.HumanService
 import utils.Validate
 
 import scala.concurrent.duration._
 import scala.concurrent.{ExecutionContext, Future}
 
-class HumanController @Inject() (humanRepo: HumanRepositoryImp, parser: PlayBodyParsers, cc: MessagesControllerComponents,
-                                 cache: AsyncCacheApi, cached: Cached, parserValidation: Validate)
+class HumanController @Inject() (humanRepo: HumanRepositoryImp, humanService: HumanService, parser: PlayBodyParsers,
+                                 cc: MessagesControllerComponents, cache: AsyncCacheApi, cached: Cached, parserValidation: Validate)
                                 (implicit  ec: ExecutionContext) extends AbstractController(cc) {
 
   def list = Action.async {
 
-    humanRepo.list().map { humans =>
+    humanService.listHumans().map { humans =>
       Ok(Json.toJson(humans))
     }
   }
