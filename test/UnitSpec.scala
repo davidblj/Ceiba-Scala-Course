@@ -1,12 +1,9 @@
 import akka.actor.ActorSystem
-import controllers.{AsyncController, CountController}
+import controllers.AsyncController
 import org.scalatestplus.play._
 import play.api.test.Helpers._
 import play.api.test.FakeRequest
 import org.scalatest.mockito.MockitoSugar
-
-import org.mockito.Mockito._
-import play.api.Configuration
 
 /**
  * Unit tests can run without a full Play application.
@@ -47,7 +44,6 @@ class UnitSpec extends PlaySpec with MockitoSugar{
         actorSystem.terminate()
       }
     }
-
   }
 
 }
