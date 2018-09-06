@@ -16,7 +16,8 @@ import scala.concurrent.ExecutionContext
 class ExampleFilter @Inject()(implicit ec: ExecutionContext) extends EssentialFilter {
   override def apply(next: EssentialAction) = EssentialAction { request =>
     next(request).map { result =>
-      result.withHeaders("X-ExampleFilter" -> "foo")
+      // do some logging also !
+      result.withHeaders("X-Ceiba-filter" -> "foo")
     }
   }
 }
