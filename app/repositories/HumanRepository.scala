@@ -39,7 +39,6 @@ class HumanRepositoryImp @Inject()(dbConfigProvider: DatabaseConfigProvider)
   }
 
   def update(human: Human): Future[Int] = {
-
     val query = for { h <- humans
                       if h.id === human.id } yield h
     db.run(query.update(human))

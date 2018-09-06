@@ -14,13 +14,12 @@ import services.HumanService
 
 import scala.concurrent.{ExecutionContext, Future}
 
+// todo: solve questions
 // como puedo modificar el contexto de Play para cada prueba ? (sin instanciar
 // una app en cada test)
 // como evaluo un futuro sin el futureResult ?
 // una prueba unitaria no puede utilizar GuiceOneApp ?
-
 // que es un fixture
-// que son las pruebas de web browser
 
 class HumanServiceSpec extends PlaySpec with GuiceOneAppPerSuite with MockitoSugar with ScalaFutures {
 

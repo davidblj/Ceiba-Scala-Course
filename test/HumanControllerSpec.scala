@@ -1,17 +1,20 @@
 import org.scalatestplus.play.PlaySpec
 import org.scalatestplus.play.guice.GuiceOneServerPerSuite
-import play.api.db.Databases
+import play.api.db.Database
 import play.api.db.evolutions.Evolutions
-import play.api.http.Status
 import play.api.libs.json.Json
+import play.api.http.Status
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
+
 
 // como comparo jsValues
 
 class HumanControllerSpec extends PlaySpec with GuiceOneServerPerSuite {
 
-  val database = Databases(
+  // todo: use a custom database for testing purposes
+  /*
+    val database = Databases(
     driver = "com.mysql.jdbc.Driver",
     url = "jdbc:mysql://localhost:3306/playTesting",
     name = "playTesting",
@@ -21,7 +24,9 @@ class HumanControllerSpec extends PlaySpec with GuiceOneServerPerSuite {
     )
   )
 
-  Evolutions.applyEvolutions(database)
+  Evolutions.applyEvolutions(database)*/
+
+  lazy val database = app.injector.instanceOf[Database]
 
   "Human routes#list" should {
 
@@ -42,9 +47,9 @@ class HumanControllerSpec extends PlaySpec with GuiceOneServerPerSuite {
       status(result) mustBe Status.OK
       contentType(result) mustBe Some("application/json")
 
-      contentAsJson(result) mustBe Json.arr()
-      /*val jsResult = contentAsJson(result).toString()
-      jsResult mustBe "[]"*/
+      // contentAsJson(result) mustBe Json.arr()
+      val jsResult = contentAsJson(result).toString()
+      jsResult mustBe "[]"
     }
   }
 }
