@@ -22,7 +22,8 @@ class CountController @Inject() (cc: ControllerComponents,
    * `GET /count` requests by an entry in the `routes` config file.
    */
   def count = Action {
-    println(config.get[String]("application.name"))
+    println(config.get[String]("****application.name****"))
+    println(config.get[String]("****play.http.secret.key****"))
     Ok(counter.nextCount().toString)
   }
 }
