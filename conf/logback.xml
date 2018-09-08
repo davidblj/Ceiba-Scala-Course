@@ -4,7 +4,11 @@
   <conversionRule conversionWord="coloredLevel" converterClass="play.api.libs.logback.ColoredLevel" />
 
   <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-    <file>C:/Users/david.jaramillo/Desktop/repos/Idea workspace/Starter/logs/application.log</file>
+    <!--windows config-->
+    <!--<file>C:/Users/david.jaramillo/Desktop/repos/Idea workspace/Starter/logs/application.log</file>-->
+
+    <!--default config (for linux builds)-->
+    <file>${application.home:-.}/logs/application.log</file>
     <encoder>
       <pattern>%date [%level] from %logger in %thread - %message%n%xException</pattern>
     </encoder>
@@ -12,7 +16,10 @@
 
   <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
     <encoder>
-      <pattern>%coloredLevel %logger{15} - %message%n%xException{10}</pattern>
+      <!--<pattern>%coloredLevel %logger{15} - %message%n%xException{10}</pattern>-->
+
+      <!--Customized logging pattern-->
+      <pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n</pattern>
     </encoder>
   </appender>
 
@@ -33,7 +40,7 @@
   <logger name="com.avaje.ebeaninternal.server.lib.BackgroundThread" level="OFF" />
   <logger name="com.gargoylesoftware.htmlunit.javascript" level="OFF" />
 
-  <root level="WARN">
+  <root level="TRACE">
     <appender-ref ref="ASYNCFILE" />
     <appender-ref ref="ASYNCSTDOUT" />
   </root>
