@@ -19,7 +19,7 @@
       <!--<pattern>%coloredLevel %logger{15} - %message%n%xException{10}</pattern>-->
 
       <!--Customized logging pattern-->
-      <pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n</pattern>
+      <pattern>%date %level [%thread] %logger %msg%n</pattern>
     </encoder>
   </appender>
 
@@ -39,6 +39,8 @@
   <logger name="com.avaje.ebeaninternal.server.core.XmlConfigLoader" level="OFF" />
   <logger name="com.avaje.ebeaninternal.server.lib.BackgroundThread" level="OFF" />
   <logger name="com.gargoylesoftware.htmlunit.javascript" level="OFF" />
+  <logger name="com.zaxxer.hikari" level="OFF" />
+  <logger name="net.sf.ehcache" level="OFF" />
 
   <root level="TRACE">
     <appender-ref ref="ASYNCFILE" />

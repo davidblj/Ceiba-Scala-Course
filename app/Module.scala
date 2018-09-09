@@ -3,6 +3,7 @@ import java.time.Clock
 
 import repositories.{HumanRepository, HumanRepositoryImp}
 import services.{ApplicationTimer, AtomicCounter, Counter}
+import utils.tasks.FactoryTask
 
 /**
  * This class is a Guice module that tells Guice how to bind several
@@ -17,16 +18,15 @@ import services.{ApplicationTimer, AtomicCounter, Counter}
 class Module extends AbstractModule {
 
   override def configure() = {
-    // Use the system clock as the default implementation of Clock
+
+    // default instatiations
     bind(classOf[Clock]).toInstance(Clock.systemDefaultZone)
 
-    // Set AtomicCounter as the implementation for Counter.
+    // classes
     bind(classOf[Counter]).to(classOf[AtomicCounter])
-
-    // Ask Guice to create an instance of ApplicationTimer when the
-    // application starts.
-    bind(classOf[ApplicationTimer]).asEagerSingleton()
-
     bind(classOf[HumanRepository]).to(classOf[HumanRepositoryImp])
+
+    // singletons
+    bind(classOf[ApplicationTimer]).asEagerSingleton()
   }
 }

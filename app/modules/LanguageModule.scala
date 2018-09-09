@@ -4,7 +4,7 @@ import com.google.inject.AbstractModule
 import com.google.inject.name.Names
 import services.{EnglishGreeter, Greeter, SpanishGreeter}
 
-class LanguageModule extends AbstractModule{
+class LanguageModule extends AbstractModule {
 
   override def configure(): Unit = {
     // Ask Guice to create an instance of ApplicationTimer when the
