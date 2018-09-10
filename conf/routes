@@ -49,6 +49,7 @@ GET /testing/parameters  controllers.TestingController.queryParameter(parameter)
 # requestWithHeader
 GET /testing/requestWithHeader  controllers.TestingController.requestWithHeader
 
+
 # *** Manipulating results ***
 
 
@@ -148,3 +149,10 @@ GET /testing/wsAction                   controllers.TestingController.wsAction
 GET /testing/greet                      controllers.TestingController.greet
 
 
+# *** Calculator challenge ***
+
+
+GET /calculator/sum                      controllers.CalculatorController.sum(a: Int, b: Int)
+GET /calculator/subtract                controllers.CalculatorController.subtract(a: Int, b: Int)
+GET /calculator/divide                   controllers.CalculatorController.divide(a: Int, b: Int)
+GET /calculator/multiply                 controllers.CalculatorController.multiply(a: Int, b: Int)

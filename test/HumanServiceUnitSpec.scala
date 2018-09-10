@@ -42,6 +42,7 @@ class HumanServiceSpec extends PlaySpec with GuiceOneAppPerSuite with MockitoSug
       val futureResult: Future[Seq[Human]]  = humanService.listHumans()
 
       val humans: Seq[Human] = futureResult.futureValue
+      // We are using "should" instead
       humans should have length 0
 
       /*futureResult.map(humans =>
@@ -57,6 +58,7 @@ class HumanServiceSpec extends PlaySpec with GuiceOneAppPerSuite with MockitoSug
       val futureResult: Future[Int]  = humanService.saveHuman(human)
 
       val resultCode = futureResult.futureValue
+      // We are using "asserts" instead
       assert( resultCode == 1)
 
       /*futureResult.map(resultCode =>
