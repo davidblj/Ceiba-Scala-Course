@@ -10,7 +10,7 @@ import play.api.test.Helpers._
 
 // como comparo jsValues
 
-class HumanControllerSpec extends PlaySpec with GuiceOneServerPerSuite {
+class HumanControllerFunctionalSpec extends PlaySpec with GuiceOneServerPerSuite {
 
   // todo: use a custom database for testing purposes
   /*
@@ -24,9 +24,9 @@ class HumanControllerSpec extends PlaySpec with GuiceOneServerPerSuite {
     )
   )
 
-  Evolutions.applyEvolutions(database)*/
-
+  Evolutions.applyEvolutions(database)
   lazy val database = app.injector.instanceOf[Database]
+  */
 
   "Human routes#list" should {
 

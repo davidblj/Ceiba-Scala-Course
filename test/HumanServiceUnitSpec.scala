@@ -15,15 +15,14 @@ import services.HumanService
 import scala.concurrent.{ExecutionContext, Future}
 
 // todo: solve questions
-// como puedo modificar el contexto de Play para cada prueba ? (sin instanciar
-// una app en cada test)
+// como puedo modificar el contexto de Play para cada prueba ? (sin instanciar una app en cada test) https://www.playframework.com/documentation/2.6.x/ScalaFunctionalTestingWithScalaTest
 // como evaluo un futuro sin el futureResult ?
 // una prueba unitaria no puede utilizar GuiceOneApp ?
-// que es un fixture
+// que son los fixtures
 
 class HumanServiceSpec extends PlaySpec with GuiceOneAppPerSuite with MockitoSugar with ScalaFutures {
 
-  // add a custom HumanRepo mock implementation
+  // we are adding a custom HumanRepo mock implementation
   // note that you will need to specify this every time
   // if you would need an specialized humanRepo implementation for each
   // test case
@@ -31,7 +30,7 @@ class HumanServiceSpec extends PlaySpec with GuiceOneAppPerSuite with MockitoSug
     .overrides(bind[HumanRepository].to[humanRepoMock])
     .build()
 
-  // get an instance of HumanService. This would be more useful if we have
+  // we are getting an instance of HumanService. This would be more useful if we have
   // implicits and multiple injects that would be a pain to mock
   val humanService = app.injector.instanceOf(classOf[HumanService])
   // implicit val ec: ExecutionContext = ExecutionContext.Implicits.global
@@ -42,7 +41,8 @@ class HumanServiceSpec extends PlaySpec with GuiceOneAppPerSuite with MockitoSug
       val futureResult: Future[Seq[Human]]  = humanService.listHumans()
 
       val humans: Seq[Human] = futureResult.futureValue
-      // We are using "should" instead
+
+      // We are using "should" on this test
       humans should have length 0
 
       /*futureResult.map(humans =>
@@ -58,7 +58,8 @@ class HumanServiceSpec extends PlaySpec with GuiceOneAppPerSuite with MockitoSug
       val futureResult: Future[Int]  = humanService.saveHuman(human)
 
       val resultCode = futureResult.futureValue
-      // We are using "asserts" instead
+
+      // We are using "asserts" on this test
       assert( resultCode == 1)
 
       /*futureResult.map(resultCode =>
