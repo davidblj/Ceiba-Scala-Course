@@ -38,9 +38,9 @@ class HumanServiceServiceSpec extends PlaySpec with GuiceOneAppPerSuite with Moc
   "HumanService#list" should {
     "return no humans" in {
 
-      val futureResult: Future[Seq[HumanService]]  = humanService.listHumans()
+      val futureResult: Future[Seq[Human]]  = humanService.listHumans()
 
-      val humans: Seq[HumanService] = futureResult.futureValue
+      val humans: Seq[Human] = futureResult.futureValue
 
       // We are using "should" on this test
       humans should have length 0
@@ -54,7 +54,7 @@ class HumanServiceServiceSpec extends PlaySpec with GuiceOneAppPerSuite with Moc
   "HumanService#create" should {
     "save humans successfully" in {
 
-      val human = mock[HumanService]
+      val human = mock[Human]
       val futureResult: Future[Int]  = humanService.saveHuman(human)
 
       val resultCode = futureResult.futureValue
@@ -70,8 +70,10 @@ class HumanServiceServiceSpec extends PlaySpec with GuiceOneAppPerSuite with Moc
 }
 
 class humanRepoMock extends HumanRepository {
-  override def create(human: HumanService): Future[Int] = Future.successful(1)
-  override def list(): Future[Seq[HumanService]] = Future.successful(List())
+  override def create(human: Human): Future[Int] = Future.successful(1)
+  override def list(): Future[Seq[Human]] = Future.successful(List())
   override def del(id: Long): Future[Int] = Future.successful(1)
-  override def update(human: HumanService): Future[Int] = Future.successful(1)
+  override def update(human: Human): Future[Int] = Future.successful(1)
+  override def find(id: Long): Future[Option[Human]] = ???
+  override def findByName(name: String): Future[Seq[Human]] = ???
 }
