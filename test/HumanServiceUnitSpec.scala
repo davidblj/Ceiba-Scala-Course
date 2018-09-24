@@ -1,6 +1,5 @@
 
 import models.Human
-import org.scalatest.Assertion
 import org.scalatest.concurrent.ScalaFutures
 import org.scalatest.Matchers._
 import org.scalatest.mockito.MockitoSugar
@@ -9,7 +8,7 @@ import org.scalatestplus.play.guice.GuiceOneAppPerSuite
 import play.api.Application
 import play.api.inject.bind
 import play.api.inject.guice.GuiceApplicationBuilder
-import repositories.{HumanRepository, HumanRepositoryImp}
+import repositories.HumanRepository
 import services.HumanService
 
 import scala.concurrent.{ExecutionContext, Future}
@@ -20,7 +19,7 @@ import scala.concurrent.{ExecutionContext, Future}
 // una prueba unitaria no puede utilizar GuiceOneApp ?
 // que son los fixtures
 
-class HumanServiceServiceSpec extends PlaySpec with GuiceOneAppPerSuite with MockitoSugar with ScalaFutures {
+class HumanServiceUnitSpec extends PlaySpec with GuiceOneAppPerSuite with MockitoSugar with ScalaFutures {
 
   // we are adding a custom HumanRepo mock implementation
   // note that you will need to specify this every time
