@@ -20,7 +20,7 @@ import scala.concurrent.{ExecutionContext, Future}
 // una prueba unitaria no puede utilizar GuiceOneApp ?
 // que son los fixtures
 
-class HumanServiceSpec extends PlaySpec with GuiceOneAppPerSuite with MockitoSugar with ScalaFutures {
+class HumanServiceServiceSpec extends PlaySpec with GuiceOneAppPerSuite with MockitoSugar with ScalaFutures {
 
   // we are adding a custom HumanRepo mock implementation
   // note that you will need to specify this every time
@@ -38,9 +38,9 @@ class HumanServiceSpec extends PlaySpec with GuiceOneAppPerSuite with MockitoSug
   "HumanService#list" should {
     "return no humans" in {
 
-      val futureResult: Future[Seq[Human]]  = humanService.listHumans()
+      val futureResult: Future[Seq[HumanService]]  = humanService.listHumans()
 
-      val humans: Seq[Human] = futureResult.futureValue
+      val humans: Seq[HumanService] = futureResult.futureValue
 
       // We are using "should" on this test
       humans should have length 0
@@ -54,7 +54,7 @@ class HumanServiceSpec extends PlaySpec with GuiceOneAppPerSuite with MockitoSug
   "HumanService#create" should {
     "save humans successfully" in {
 
-      val human = mock[Human]
+      val human = mock[HumanService]
       val futureResult: Future[Int]  = humanService.saveHuman(human)
 
       val resultCode = futureResult.futureValue
@@ -70,8 +70,8 @@ class HumanServiceSpec extends PlaySpec with GuiceOneAppPerSuite with MockitoSug
 }
 
 class humanRepoMock extends HumanRepository {
-  override def create(human: Human): Future[Int] = Future.successful(1)
-  override def list(): Future[Seq[Human]] = Future.successful(List())
+  override def create(human: HumanService): Future[Int] = Future.successful(1)
+  override def list(): Future[Seq[HumanService]] = Future.successful(List())
   override def del(id: Long): Future[Int] = Future.successful(1)
-  override def update(human: Human): Future[Int] = Future.successful(1)
+  override def update(human: HumanService): Future[Int] = Future.successful(1)
 }

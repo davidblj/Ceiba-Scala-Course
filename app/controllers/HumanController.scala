@@ -1,7 +1,6 @@
 package controllers
 
 import repositories.HumanRepositoryImp
-import models.Human.humanFormat
 import javax.inject.Inject
 import models.Human
 import play.api.cache._
@@ -27,7 +26,7 @@ class HumanController @Inject() (humanRepo: HumanRepositoryImp, humanService: Hu
   def create = Action.async(parserValidation.validateJson[Human]) {
 
     request => {
-      humanRepo.create(request.body).map(code => {
+      humanService.saveHuman(request.body).map(code => {
         Ok(s"A human spawned")
       })
     }
@@ -46,6 +45,24 @@ class HumanController @Inject() (humanRepo: HumanRepositoryImp, humanService: Hu
       humanRepo.update(request.body).map(code => {
         Ok("Your human has been updated !")
       })
+    }
+  }
+
+  def find(id: Long) = Action.async {
+
+    humanRepo.find(id).map(human => {
+      if (human.isEmpty) NotFound("resource not found")
+      else Ok(Json.toJson(human.get))
+    })
+  }
+
+  def search() = Action.async { request =>
+
+    val name = request.getQueryString("name")
+    if (name.isDefined) {
+      humanService.findHumanByName(name.get).map(humans => Ok(Json.toJson(humans)))
+    } else {
+      humanService.listHumans().map(humans =>Ok(Json.toJson(humans)))
     }
   }
 

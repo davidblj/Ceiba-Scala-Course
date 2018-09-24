@@ -8,12 +8,17 @@ import slick.lifted.TableQuery
 import tables.Humans
 import scala.concurrent.{ExecutionContext, Future}
 
+// como puedo navegar la documentacion para mirar los operacionse en los queries.
+// navegar las acciones que puedo ejecutar
+
 trait HumanRepository {
   def create(human: Human): Future[Int]
   def list(): Future[Seq[Human]]
   def del(id: Long): Future[Int]
   def update(human: Human): Future[Int]
-}
+  def find(id: Long): Future[Option[Human]]
+  def findByName(name: String): Future[Seq[Human]]
+  }
 
 @Singleton
 class HumanRepositoryImp @Inject()(dbConfigProvider: DatabaseConfigProvider)
@@ -42,5 +47,15 @@ class HumanRepositoryImp @Inject()(dbConfigProvider: DatabaseConfigProvider)
     val query = for { h <- humans
                       if h.id === human.id } yield h
     db.run(query.update(human))
+  }
+
+  def find(id: Long): Future[Option[Human]] = {
+    val query = humans.filter(_.id === id).take(1)
+    db.run(query.result.headOption)
+  }
+
+  def findByName(name: String): Future[Seq[Human]] = {
+    val query = humans.filter(_.name like s"$name%")
+    db.run(query.result)
   }
 }

@@ -118,15 +118,18 @@ POST /testing/addAsync                      controllers.TestingController.addAsy
 POST /testing/fileUpload                    controllers.TestingController.fileUpload
 
 
-# *** Play Slick ***
+# *** Play Slick (CRUD) ***
+
 
 GET /humans                                     controllers.HumanController.list
 POST /humans                                    controllers.HumanController.create
 PUT /humans                                     controllers.HumanController.update
 DELETE /humans/:id                              controllers.HumanController.delete(id: Long)
+GET /humans/search                              controllers.HumanController.search
+GET /humans/:id                                 controllers.HumanController.find(id: Long)
 
 
-# *** Play Slick ***
+# *** Cache ***
 
 
     #2

@@ -6,16 +6,23 @@ import repositories.{HumanRepository}
 
 import scala.concurrent.Future
 
-class HumanService @Inject() (humanRepo: HumanRepository) {
+// this is just a wrapper. and for testing purposes
+// we won't code any logic here
+class HumanService @Inject()(humanRepo: HumanRepository) {
 
     def listHumans(): Future[Seq[Human]] = {
-
-      // this is just a wrapper. and for testing purposes
-      // we won't code any logic here
       humanRepo.list()
     }
 
     def saveHuman(human: Human): Future[Int]  = {
       humanRepo.create(human)
+    }
+
+    def findHuman(id: Long): Future[Option[Human]] = {
+      humanRepo.find(id)
+    }
+
+    def findHumanByName(name: String): Future[Seq[Human]] = {
+      humanRepo.findByName(name)
     }
 }
